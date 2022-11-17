@@ -1,0 +1,6 @@
+This one was fun because once you used the diff command between passwords.old and passwords.new you can see the password for level 18 
+
+BUT once you try to SSH into level 18, it immediately gets terminated because of the bashrc file which probably tells the session to terminate once someone ssh into it
+a quick work around is to add cat readme to the end of the ssh and it will spit out a new password for level19 
+
+ssh bandit18@bandit.labs.overthewire.org -p 2220 "cat readme"
