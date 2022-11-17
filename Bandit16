@@ -1,0 +1,8 @@
+This one was a bit challenging because I do not like using vim and sure i couldve used nano but i thought it would be better to challenge myself with vim 
+
+Essentially you run 'nmap localhost -p31000-32000' to check which ports are open 
+Then you run 'cat /etc/bandit_pass/bandit16 | openssl s_client -connect localhost:31518 -ign_eof' on each of those ports until you find one that is speaking SSL
+Finally you find the correct port and you are given an RSA private key, now i have worked with RSA keys before in my crypto class so i knew how to handle it
+You save the RSA key in a file and chmod 400 the file changing the permissions so only we can read it (private key things)
+
+Finally you run the normal command to get into the next level but this time you -i the file you saved in this case bandit17.key and you are IN!
