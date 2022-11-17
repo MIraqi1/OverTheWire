@@ -1,16 +1,3 @@
-Bandit10 Results 
-
-bandit10@bandit:~$ ls
-data.txt
-bandit10@bandit:~$ cat data.txt 
-VGhlIHBhc3N3b3JkIGlzIDZ6UGV6aUxkUjJSS05kTllGTmI2blZDS3pwaGxYSEJNCg==
-bandit10@bandit:~$ man base64
-bandit10@bandit:~$ cat data.txt | base64 -d
-The password is 6zPeziLdR2RKNdNYFNb6nVCKzphlXHBM
-
-
-
-  Enjoy your stay!
 
 bandit12@bandit:~$ ls 
 data.txt
