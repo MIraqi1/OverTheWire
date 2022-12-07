@@ -1,0 +1,9 @@
+First time coming across cron in a shell env, so i had to man cron and read through the different dom, dow, doh scenario's but it was easy to understand. 
+
+We just needed to understand the operation that the time-based scheduler was running, once we did we understood that the password was being extracted in tmp file 
+we checked to see if we had permissions, the -r indicated we did and we just used cat to extract password. 
+
+
+
+
+
