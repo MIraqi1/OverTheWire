@@ -1,0 +1,32 @@
+This was a fun one because we used the cron again from the previous level and it really took some understanding of how to read scripts to know what to do
+Essentially the script we find runs a command to copy the hash of the password and store in a $mytarget location and we just needed to find that  out and cat into the file and bam password is printed
+
+bandit22@bandit:/etc/cron.d$ ls
+cronjob_bandit15_root  cronjob_bandit17_root  cronjob_bandit22  cronjob_bandit23  cronjob_bandit24  cronjob_bandit25_root  e2scrub_all  otw-tmp-dir  sysstat
+bandit22@bandit:/etc/cron.d$ cat cronjob_bandit23
+@reboot bandit23 /usr/bin/cronjob_bandit23.sh  &> /dev/null
+* * * * * bandit23 /usr/bin/cronjob_bandit23.sh  &> /dev/null
+bandit22@bandit:/etc/cron.d$ cat /usr/bin/cronjob_bandit23.sh
+#!/bin/bash
+
+myname=$(whoami)
+mytarget=$(echo I am user $myname | md5sum | cut -d ' ' -f 1)
+
+echo "Copying passwordfile /etc/bandit_pass/$myname to /tmp/$mytarget"
+
+cat /etc/bandit_pass/$myname > /tmp/$mytarget
+bandit22@bandit:/etc/cron.d$ whoami
+bandit22
+bandit22@bandit:/etc/cron.d$ echo $mytarget
+
+bandit22@bandit:/etc/cron.d$ echo "I am user bandit22" | md5sum 
+8169b67bd894ddbb4412f91573b38db3  -
+bandit22@bandit:/etc/cron.d$ echo "I am user bandit23" | md5sum 
+8ca319486bfbbc3663ea0fbe81326349  -
+bandit22@bandit:/etc/cron.d$ cat 8ca319486bfbbc3663ea0fbe81326349
+cat: 8ca319486bfbbc3663ea0fbe81326349: No such file or directory
+bandit22@bandit:/etc/cron.d$ echo "I am user bandit23" | md5sum | cut -d " " -f 1
+8ca319486bfbbc3663ea0fbe81326349
+bandit22@bandit:/etc/cron.d$ cat /tmp/8ca319486bfbbc3663ea0fbe81326349
+QYw0Y2aiA672PsMmh9puTQuhoz8SyR2G
+bandit22@bandit:/etc/cron.d$ 
