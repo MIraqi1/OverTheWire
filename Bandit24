@@ -1,0 +1,16 @@
+This was one of my favorite bandits, learning how to brute force. Although it was a simple brute force, the principle remains there and it took me a few hours to get my script right
+Ok, i started off with checking the localhost 30002 and randomly trying 4 digit pins along with the previous lvl pwd and obviously no luck. Quickly realized 
+we need a script specifically a for loop to spit out all the attempts into a .txt file that we can cross check for the pin once it runs all the possibilites (brute force)
+
+script i wrote:
+
+#!/bin/bash 
+
+for i in {0000..9999}
+do 
+        echo "VAfGXJ1PBSsPSnvsjI8p759leLZ9GGar $i" >> list.txt;
+done
+
+once we get the list we grep with nc localhost 30002 and wait some time and get the correct pin and pwd for level 25 
+
+
